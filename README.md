@@ -23,20 +23,34 @@ Figure 01 4 Bit SISO Register
 The synchronous nature of the flip-flops ensures that the shifting of data occurs in a coordinated manner. When the clock signal rises, the input data is sampled and stored in the first flip-flop. On subsequent clock pulses, the stored data propagates through the flip-flops, moving from one flip-flop to the next.
 Each D flip-flop in the circuit has a Data (D) input, a Clock (CLK) input, and an output (Q). The D input represents the data to be loaded into the flip-flop, while the CLK input is connected to the common clock signal. The output (Q) of each flip-flop is connected to the D input of the next flip-flop, forming a cascade.
 
-**Procedure**
-
-/* write all the steps invloved */
-
+Procedure
+1.Type the program in Quartus software.
+2.Generate the RTL schematic and save the logic diagram.
+3.Create nodes for inputs and outputs to generate the timing diagram.
+4.For different input combinations generate the timing diagram.
 **PROGRAM**
+Developed by:D.Amirda varshini RegisterNumber:25004322
+module EXP5 (
+    input  wire clk,     // clock input
+    input  wire rst,     // synchronous reset
+    input  wire serial_in, // serial data input
+    output reg  [2:0] q   // 3-bit register output
+);
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming.
+always @(posedge clk) begin
+    if (rst)
+        q <= 3'b000;          // reset all bits
+    else
+        q <= {q[1:0], serial_in}; // shift left
+end
 
-Developed by: RegisterNumber:
-
-*/
+endmodule
 
 **RTL LOGIC FOR SISO Shift Register**
+<img width="916" height="500" alt="image" src="https://github.com/user-attachments/assets/07bd0f50-bb4d-4f84-96c8-156539f61f7a" />
 
 **TIMING DIGRAMS FOR SISO Shift Register**
+<img width="1313" height="168" alt="image" src="https://github.com/user-attachments/assets/0b27e09d-af7c-4421-9544-76f3217f8a21" />
 
 **RESULTS**
+SISO Shift Register is implemented using verilog and validated their functionality using their functional tables
